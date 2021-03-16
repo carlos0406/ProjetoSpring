@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{..?layout}">
+<head>
+<meta charset="UTF-8">
+
+<title>Hello wolrd</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+	crossorigin="anonymous"></script>
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap')
+	;
+
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	font-weight: 300;
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+
+
+
+
+
+a {
+	color: white;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+
+</style>
+</head>
+<body>
+	<section layout:fragment="corpo">
+	<div th:replace="fragments/mensagens"></div>
+	<form style="margin-top:10px;" class="main" th:action="@{/veiculo/salvar}"
+		th:object="${veiculo}" method="post" enctype="multipart/form-data">
+		<input type="hidden" th:field="${veiculo.id}">
+
+
+		<div class="container-fluid row g-3">
+			<div class="form-group">
+				<label>Placa:</label> <input class="form-control" type="text" th:field="${veiculo.placa}" />
+			</div>
+			
+			<div class="form-group">
+				<label>Documento do veiculo:</label> 
+				
+				<input class="form-control" type="file" th:name="file" />
+				
+				<input type="hidden" th:field="${veiculo.documento.id}">
+			</div>
+			
+			<div class="form-group col-md-6">
+				<label>Modelo</label>
+				<input class="form-control" type="text" th:field="${veiculo.modelo}" />
+			</div>
+			 
+				<div class="form-group col-md-6">
+					<label>Ano</label>
+					<input class="form-control" type="text" th:field="${veiculo.ano}" />
+				</div>
+			<input class="col-md-6 btn btn-primary"
+			type="submit" th:value="${veiculo.id}==0? Cadastrar : Editar">
+		<input class="col-md-6 btn btn-danger" type="submit" value="cancelar" formaction="/" formmethod="get">
+			
+	</form>
+	</section>
+</body>
+</html>

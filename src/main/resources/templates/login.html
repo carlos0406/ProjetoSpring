@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" 
+content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Hello wolrd</title>
+</head>
+<body>
+	<form method="post" th:action="@{/login}">
+	<div th:replace="fragments/mensagens"></div>
+	Email:
+	<input type="text" name="username" required autofocus><br/>
+	
+	Senha:
+	<input type="password" name="password" required><br/>
+	<input type="checkbox" name="remember-me"> Lembrar me <br/>
+	<button type="submit">Entrar</button>
+		
+	
+	</form>
+	</body>
+</html>

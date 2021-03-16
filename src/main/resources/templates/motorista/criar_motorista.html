@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{..?layout}">
+<head>
+<meta charset="UTF-8">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+	crossorigin="anonymous"></script>
+
+<title>Hello wolrd</title>
+<style type="text/css">
+	a {
+	color: white;
+	text-decoration: none;
+	font-weight: 400;
+	
+	
+}
+</style>
+</head>
+<body>
+	<section layout:fragment="corpo">
+	<div th:replace="fragments/mensagens"></div>
+	
+	<form style="margin-top:10px;" th:action="@{/motorista/salvar}" th:object="${motorista}"
+		method="post" enctype="multipart/form-data">
+		<input type="hidden" th:field="${motorista.id}" />
+
+
+		<div class="container-fluid row g-3">
+		
+			<div class="form-group">
+				<label for="nome">Nome:</label> <input class="form-control"
+					type="text" th:field="${motorista.nome}" id="nome" />
+			</div>
+			
+			<div class="form-group col-md-6">
+				<label for="cnh">Documento do motorista:</label> 
+				<input class="form-control" type="file" th:name="documentoCad" />
+				<input type="hidden" th:field="${motorista.documento.id}">
+			</div>
+			<div class="form-group col-md-6">
+				<label for="cnh">Foto do motorista:</label> 
+				<input class="form-control" type="file" th:name="fotoCad" />
+				<input type="hidden" th:field="${motorista.foto.id}">
+			</div>
+
+
+			<div class="form-group col-md-6">
+				<label for="cnh">CNH:</label> <input class="form-control"
+					type="text" th:field="${motorista.cnh}" />
+			</div>
+
+
+			<div class="form-group col-md-6">
+				<label for="cnh">Categoria da carteira: </label> <input
+					class="form-control" type="text" th:field="${motorista.categoria}" />
+			</div>
+
+
+
+
+			<div class="form-group">
+			
+				<label for="veiculo">Veiculo</label> 
+				<select class="form-select"
+					th:object="${veiculo}" th:field="${motorista.veiculo}">
+					<option value="">Selecione...</option>
+
+					<option th:each="v:${veiculos}" th:text="${v.modelo}  + ${v.ano} "
+						th:value="${{v}}"></option>
+
+				</select>
+			</div>
+
+
+
+
+
+
+
+
+
+			<input class="col-md-6 btn btn-primary" type="submit"
+				th:value="${motorista.id}==0? Cadastrar : Editar" /> <input
+				class="col-md-6 btn btn-danger" type="submit" value="cancelar"
+				formaction="/" formmethod="get" />
+
+
+
+
+
+
+		</div>
+	</form>
+	</section>
+	
+</body>
+</html>

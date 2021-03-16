@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{..?layout}">
+<head>
+<meta charset="UTF-8">
+	<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+	crossorigin="anonymous"></script>
+	
+	<style type="text/css">
+
+
+
+a {
+	color: white;
+	text-decoration: none;
+	font-weight: 400;
+	
+	
+}
+
+
+
+</style>
+<title></title>
+</head>
+<body>
+
+	
+	<div th:if="${msgSucess}!=null" style="position:absolute; background:white">
+		<b th:text="${msgSucess}" style="color: blue"></b> <br /> <br />
+	</div>
+
+	<div th:if="${msgError}!=null">
+		<b th:text="${msgError}" style="color: red" ></b> <br /> <br />
+	</div>
+	
+	<section layout:fragment="corpo">
+	<form class="main" style="margin-top:10px;" th:action="@{/motorista/resultado}" method="get">
+		
+		<div class="container-fluid row g-3">
+			<h1>Busca de Motoristas</h1>
+		
+			<div class="form-group">
+				 <p> nome: </p>
+				<input placeholder="Por favor digite o nome que deseja buscar"  class="form-control" type="text" th:name="nome" />
+			</div>
+
+			
+			
+				 
+
+			
+				
+					<input type="submit" class="btn btn-primary" value="buscar">
+					<input type="submit" class="btn btn-danger" value="cancelar"
+						formaction="/" formmethod="get">
+				</div>
+				
+			
+
+		
+		
+		<div th:if="${motoristasFiltrados!=null}">
+		<table class="table table-dark table-striped">
+			<thead>
+			<tr> 
+				<th>Nome: </th>
+				<th>Foto </th>
+				<th sec:authorize="hasAuthority('ADMIN')">CNH </th>
+				<th>Categoria </th>
+				<th>Veiculo </th>
+				<th sec:authorize="hasAuthority('ADMIN')">Documento do motorista </th>
+				<th sec:authorize="hasAuthority('ADMIN')">Opções </th>
+				
+				
+				
+			
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="m:${motoristasFiltrados}"  >
+				<td th:text="${m.nome}"> </td>
+				<td> <img th:if="${m.foto!=null}"alt="" th:src="@{/download/} +${m.foto.id} + '?salvar=false'"
+					style="max-height: 128px"> </td>
+				<td sec:authorize="hasAuthority('ADMIN')" th:text="${m.cnh}"> </td>
+				<td th:text="${m.categoria}">
+				<td th:text="${m.veiculo.modelo + m.veiculo.ano} "> </td>
+				<td> <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/download/} + ${m.documento.id}">Link do Documento</a> </td>
+					
+				<td sec:authorize="hasAuthority('ADMIN')">
+				
+				
+				<a th:href="'/motorista/edicao/'+${m.id}" sec:authorize="hasAuthority('ADMIN')"> 
+				 	Editar
+				 </a> <a th:href="'/motorista/remove/'+${m.id}" sec:authorize="hasAuthority('ADMIN')"
+				 	onclick="if(!confirm('Deseja realmente remover o usuario'))
+				 	return false">Remover</a>  </td>
+				 	
+			</tr>
+			</tbody>
+			
+		</table>
+	</div>
+		
+	</form>
+	</section>
+	
+	
+
+</body>
+</html>
