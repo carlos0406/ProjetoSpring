@@ -1,28 +1,91 @@
 <!DOCTYPE html>
-<html lang="pt"
-	xmlns="http://www.w3.org/1999/xhtml"
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="viewport" 
-content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Hello wolrd</title>
+<style type="text/css">
+body {
+	display: flex;
+	justify-content: center;
+	background: #4169e1;
+	align-items: center;
+	height: 98vh;
+	flex-direction: row;
+}
+
+input, button, label {
+	height: 48px;
+	border-radius: 10px;
+	width: 80%;
+	margin: 0 auto;
+	font: "Roboto", san-serif;
+	cursor: pointer;
+}
+
+input {
+	border: none;
+	background: #f5f5f5;
+}
+
+button {
+	border: none;
+	background: #98ff98;
+	transition: background-color 0.2s;
+}
+
+button:hover {
+	background: #32cd32;
+}
+
+form {
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 400px;
+	height: 500px;
+	border-radius: 20px;
+	justify-content: center;
+	text-align: center;
+}
+
+.checkbox {
+	height: 15px;
+	position: relative;
+	left: -100px;
+}
+
+label {
+	height: 16px;
+}
+
+h1 {
+	font: 40px sans-serif;
+}
+
+.
+</style>
 </head>
 <body>
+	
+
 	<form method="post" th:action="@{/login}">
-	<div th:replace="fragments/mensagens"></div>
-	Email:
-	<input type="text" name="username" required autofocus><br/>
-	
-	Senha:
-	<input type="password" name="password" required><br/>
-	<input type="checkbox" name="remember-me"> Lembrar me <br/>
-	<button type="submit">Entrar</button>
-		
-	
+		<div th:replace="fragments/mensagens"></div>
+		<h1>Login</h1>
+
+		<input placeholder="Digite o Email" type="text" name="username"
+			required autofocus><br /> <input placeholder="Digite A senha"
+			type="password" name="password" required><br />
+		<button type="submit">Entrar</button>
+		<label for="remeber-me"> Lembrar me </label> <input class="checkbox"
+			type="checkbox" name="remember-me"> <br />
+
+
 	</form>
-	</body>
+</body>
 </html>

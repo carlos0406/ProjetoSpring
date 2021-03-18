@@ -33,15 +33,10 @@ a {
 <body>
 
 	
-	<div th:if="${msgSucess}!=null" style="position:absolute; background:white">
-		<b th:text="${msgSucess}" style="color: blue"></b> <br /> <br />
-	</div>
-
-	<div th:if="${msgError}!=null">
-		<b th:text="${msgError}" style="color: red" ></b> <br /> <br />
-	</div>
+	
 	
 	<section layout:fragment="corpo">
+	<div th:replace="fragments/mensagens"></div>
 	<form class="main" style="margin-top:10px;" th:action="@{/motorista/resultado}" method="get">
 		
 		<div class="container-fluid row g-3">
